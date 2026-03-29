@@ -6,12 +6,21 @@ import pandas as pd
 import streamlit as st
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-TABLES_DIR = PROJECT_ROOT / "reports" / "scania_project" / "tables"
+CURRENT_FILE = Path(__file__).resolve()
+CANDIDATE_TABLE_DIRS = [
+    CURRENT_FILE.parent / "reports" / "scania_project" / "tables",
+    CURRENT_FILE.parent.parent / "reports" / "scania_project" / "tables",
+    CURRENT_FILE.parent,
+]
+TABLES_DIR = next((path for path in CANDIDATE_TABLE_DIRS if path.exists()), None)
 
 
 @st.cache_data
 def load_csv(name: str) -> pd.DataFrame:
+    if TABLES_DIR is None:
+        raise FileNotFoundError(
+            "Could not find reports/scania_project/tables in expected locations."
+        )
     path = TABLES_DIR / name
     if not path.exists():
         raise FileNotFoundError(f"Missing required file: {path}")
