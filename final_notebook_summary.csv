@@ -1,0 +1,11 @@
+item,value
+selected_model,CatBoost
+best_threshold_by_cost,0.15
+internal_cost_default_threshold,10520
+internal_cost_best_threshold,6170
+official_cost_default_threshold,19170
+official_cost_best_threshold,11360
+official_precision_pos_best_threshold,0.48257372654155495
+official_recall_pos_best_threshold,0.96
+official_f1_pos_best_threshold,0.6422836752899197
+most_important_feature,ck_000
